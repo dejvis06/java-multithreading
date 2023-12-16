@@ -7,10 +7,29 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Random;
 
+/**
+ * This class contains unit tests for thread-related functionality, showcasing various aspects
+ * of Java multithreading. It demonstrates thread creation, exception handling, thread naming,
+ * priority configuration, and interruption.
+ * <p>
+ * The class defines a main test method, {@code contextLoads()}, which creates and manages
+ * different threads, including a custom thread class, {@code CustomThread}, that extends the
+ * Java {@code Thread} class. The custom thread executes a simple loop and gets interrupted
+ * under a specific condition. Exception handling is also demonstrated for uncaught exceptions.
+ *
+ * @see Thread
+ * @see UncaughtExceptionHandler
+ * @see ThreadGroup
+ * @see Random
+ * @see Logger
+ * @see LoggerFactory
+ * @see Test
+ * @see SpringBootTest
+ */
 @SpringBootTest
-class JavaMultithreadingApplicationTests {
+class ThreadTests {
 
-    private final Logger logger = LoggerFactory.getLogger(JavaMultithreadingApplicationTests.class);
+    private final Logger logger = LoggerFactory.getLogger(ThreadTests.class);
 
     @Test
     void contextLoads() {
