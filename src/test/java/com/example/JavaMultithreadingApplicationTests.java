@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Random;
+
 @SpringBootTest
 class JavaMultithreadingApplicationTests {
 
@@ -41,8 +43,15 @@ class JavaMultithreadingApplicationTests {
 
         @Override
         public void run() {
-            logger.info("Executing thread: {}", this.getName());
-            throw new RuntimeException("Test custom thread exception handler");
+
+            while (!Thread.currentThread().isInterrupted()) {
+                logger.info("Executing thread: {}", this.getName());
+                int randomNo = new Random().nextInt(6);
+                if (randomNo == 1) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            logger.info("Thread: {} got interrupted", this.getName());
         }
     }
 
