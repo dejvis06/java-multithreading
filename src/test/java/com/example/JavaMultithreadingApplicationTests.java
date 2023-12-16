@@ -39,6 +39,7 @@ class JavaMultithreadingApplicationTests {
             this.setUncaughtExceptionHandler((Thread t, Throwable e) -> {
                 logger.error("Caught exception: \"{}\" ,in thread: {}", e.getMessage(), t);
             });
+            // main thread doesnt wait for this thread to finish -> this.setDaemon(true);
         }
 
         @Override
