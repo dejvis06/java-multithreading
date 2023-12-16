@@ -33,11 +33,12 @@ class JavaMultithreadingApplicationTests {
     private class CustomThread extends Thread {
 
         public CustomThread(String name) {
-            super(null, null, name, 0);
+            this.setName(name);
             this.setUncaughtExceptionHandler((Thread t, Throwable e) -> {
                 logger.error("Caught exception: \"{}\" ,in thread: {}", e.getMessage(), t);
             });
         }
+
         @Override
         public void run() {
             logger.info("Executing thread: {}", this.getName());
