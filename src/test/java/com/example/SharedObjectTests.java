@@ -14,7 +14,7 @@ public class SharedObjectTests {
     private final Logger logger = LoggerFactory.getLogger(SharedObjectTests.class);
 
     @Test
-    void contextLoads() {
+    void test() {
         SharedObject sharedObject = new SharedObject();
 
         Thread modifyingThread = new Thread(() -> {

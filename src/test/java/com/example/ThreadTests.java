@@ -32,7 +32,7 @@ class ThreadTests {
     private final Logger logger = LoggerFactory.getLogger(ThreadTests.class);
 
     @Test
-    void contextLoads() {
+    void test() {
         Thread.currentThread().setName("main-thread");
 
         Thread thread = new Thread(() -> {

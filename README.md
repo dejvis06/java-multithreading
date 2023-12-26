@@ -5,9 +5,9 @@ The `ThreadTests` class contains unit tests for thread-related functionality in 
 It demonstrates thread creation, exception handling, thread naming, priority configuration, and interruption.
 
 #### Class Structure
-The class defines a main test method, `contextLoads()`, which creates and manages different threads, including a custom thread class, `CustomThread`, that extends the Java `Thread` class. The custom thread executes a simple loop and gets interrupted under a specific condition. Exception handling is also demonstrated for uncaught exceptions.
+The class defines a main test method, `test()`, which creates and manages different threads, including a custom thread class, `CustomThread`, that extends the Java `Thread` class. The custom thread executes a simple loop and gets interrupted under a specific condition. Exception handling is also demonstrated for uncaught exceptions.
 
-#### Test Method: contextLoads()
+#### Test Method: test()
 ```java
 @SpringBootTest
 class ThreadTests {
@@ -15,7 +15,7 @@ class ThreadTests {
     private final Logger logger = LoggerFactory.getLogger(ThreadTests.class);
 
     @Test
-    void contextLoads() {
+    void test() {
         // Main thread naming
         Thread.currentThread().setName("main-thread");
 
@@ -67,7 +67,7 @@ class ThreadTests {
 ```
 #### Usage
 
-- The `contextLoads()` method demonstrates the creation and management of threads.
+- The `test()` method demonstrates the creation and management of threads.
 - The main thread is named "main-thread," and a worker thread is created with the name "worker-thread."
 - The worker thread is configured with a custom uncaught exception handler, maximum priority, and is started.
 - Additionally, a custom thread (`CustomThread`) is created with its own exception handler and is started.
@@ -77,9 +77,9 @@ class ThreadTests {
 The `SharedObjectTests` class contains tests demonstrating shared state between threads using the `wait` and `notify` mechanisms in Java. It showcases a scenario where one thread modifies the state of a shared object, and another thread waits until the state is modified, utilizing synchronization to ensure proper coordination.
 
 #### Class Structure
-The class defines a test method, `contextLoads()`, which creates an instance of `SharedObject` and two threads: a modifying thread and a checking thread. The modifying thread modifies the state of the shared object and notifies other threads waiting on it. The checking thread waits until the state is modified and then continues with its logic.
+The class defines a test method, `test()`, which creates an instance of `SharedObject` and two threads: a modifying thread and a checking thread. The modifying thread modifies the state of the shared object and notifies other threads waiting on it. The checking thread waits until the state is modified and then continues with its logic.
 
-#### Test Method: contextLoads()
+#### Test Method: test()
 ```java
 @SpringBootTest
 public class SharedObjectTests {
@@ -87,7 +87,7 @@ public class SharedObjectTests {
     private final Logger logger = LoggerFactory.getLogger(SharedObjectTests.class);
 
     @Test
-    void contextLoads() {
+    void test() {
         SharedObject sharedObject = new SharedObject();
 
         // Modifying thread
@@ -141,7 +141,7 @@ public class SharedObjectTests {
 
 #### Usage
 
-- The `contextLoads()` method demonstrates the coordination between two threads using the `wait` and `notify` mechanisms.
+- The `test()` method demonstrates the coordination between two threads using the `wait` and `notify` mechanisms.
 - A shared object, `SharedObject`, is created with a boolean state initially set to `false`.
 - The modifying thread modifies the state to `true` and notifies the waiting threads.
 - The checking thread waits until the state is modified, using synchronization to ensure proper coordination.
