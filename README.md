@@ -146,4 +146,8 @@ public class SharedObjectTests {
 - The modifying thread modifies the state to `true` and notifies the waiting threads.
 - The checking thread waits until the state is modified, using synchronization to ensure proper coordination.
 
+The synchronized keyword ensures that changes made by one thread inside a synchronized block are visible to other threads: </br>
+When a thread exits a synchronized block, it releases the lock, and the changes it made are guaranteed to be visible to other threads, effectively flushing the **_thread's local cache_** to the **_main memory (heap)_**. </br>
+
+
 
