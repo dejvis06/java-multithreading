@@ -265,3 +265,41 @@ This method demonstrates the usage of a fixed thread pool with a size of 3.
    }
 ```
 
+## CachedThreadPool (CachedThreadPoolTests)
+
+This test class demonstrates the usage of a cached thread pool in Java, specifically using the `Executors.newCachedThreadPool()` factory method. </br> 
+The cached thread pool is dynamic, adjusting the number of threads based on the workload. </br>
+
+The test method showcases the basic functionality of a cached thread pool:
+
+- **Thread Pool Creation:** A cached thread pool is created using the `Executors.newCachedThreadPool()` method.
+
+- **Task Submission:** Five tasks are submitted to the thread pool. Each task prints a message indicating its execution, including the task ID and the name of the current thread.
+
+- **Task Simulation:** To simulate some workload, each task includes a sleep period of 2 seconds.
+
+- **ThreadPool Shutdown:** After submitting the tasks, the cached thread pool is shut down when the tasks are completed.
+```java
+@Test
+void test() {
+    // Create a cached thread pool
+    ExecutorService executorService = Executors.newCachedThreadPool();
+
+    // Submit tasks to the pool
+    for (int i = 1; i <= 5; i++) {
+        final int taskId = i;
+        executorService.submit(() -> {
+            System.out.println("Task " + taskId + " is running on thread: " + Thread.currentThread().getName());
+            try {
+                // Simulate some task execution time
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    // Shutdown the executor service when done
+    executorService.shutdown();
+}
+```
