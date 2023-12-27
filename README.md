@@ -76,7 +76,7 @@ class ThreadTests {
 ## Shared Object Tests Overview
 The `SharedObjectTests` class contains tests demonstrating shared state between threads using the `wait` and `notify` mechanisms in Java. It showcases a scenario where one thread modifies the state of a shared object, and another thread waits until the state is modified, utilizing synchronization to ensure proper coordination.
 
-#### Class Structure
+### Class Structure
 The class defines a test method, `test()`, which creates an instance of `SharedObject` and two threads: a modifying thread and a checking thread. The modifying thread modifies the state of the shared object and notifies other threads waiting on it. The checking thread waits until the state is modified and then continues with its logic.
 
 #### Test Method: test()
@@ -149,5 +149,7 @@ public class SharedObjectTests {
 The synchronized keyword ensures that changes made by one thread inside a synchronized block are visible to other threads: </br>
 When a thread exits a synchronized block, it releases the lock, and the changes it made are guaranteed to be visible to other threads, effectively flushing the **_thread's local cache_** to the **_main memory (heap)_**. </br>
 
-
+### Volatile
+For variables declared as volatile, changes made by one thread are immediately visible to other threads, as the local cache is flushed to main memory. </br>
+Volatile applies to individual variables, ensuring visibility for reads and writes, while synchronization (synchronized blocks/methods) operates on code blocks, ensuring visibility and atomicity for the operations inside the block.
 
