@@ -303,3 +303,20 @@ void test() {
     executorService.shutdown();
 }
 ```
+
+## Callable & Future along with the ExecutorService
+
+This test showcases the submission of a `Callable` task to an `ExecutorService` and the subsequent interaction with the returned `Future` object. </br>
+The `Callable` task simulates a computation that produces a result.
+
+### Test Description
+
+The test method submits a `Callable` task to an `ExecutorService` using the `submit(Callable<T> task)` method. </br>
+The `Callable` performs a simulated computation and returns a result of type `T`. (the Future<T> acts as a wrapper object for the callable's return type T)
+
+```java
+Future<String> future = executorService.submit(() -> {
+    // Callable task logic that produces a result
+    return "Result";
+});
+```
