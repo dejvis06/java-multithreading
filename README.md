@@ -155,7 +155,7 @@ Volatile applies to individual variables, ensuring visibility for reads and writ
 
 ## Locks (LockTests)
 
-This test method demonstrates a simple example of a potential deadlock using ReentrantLocks.
+The test method demonstrates a simple example of a potential deadlock using ReentrantLocks.
 
 ### Thread Actions
 
@@ -177,3 +177,27 @@ This test method demonstrates a simple example of a potential deadlock using Ree
 
 Can be considered more versatile and flexible than locks, offering additional synchronization patterns beyond mutual exclusion (where only one thread or process at a time is granted exclusive access to a particular resource or critical section of code).
 
+
+## SingleThreadExecutor (SingleThreadExecutorTests)
+
+The test method showcases the usage of `SingleThreadExecutor` for the sequential execution of tasks.
+
+1. **Create Executor:**
+    - Create a `SingleThreadExecutor` to manage the execution of tasks in a single background thread.
+
+2. **Enqueue Tasks:**
+    - Enqueue tasks for execution, with each task printing a message indicating its order and the executing thread.
+    - Tasks are submitted in a loop, simulating a sequence of asynchronous operations.
+
+3. **Sequential Execution:**
+    - `SingleThreadExecutor` ensures that tasks are processed sequentially, adhering to a first-in, first-out (FIFO) order.
+    - The single background thread is reused for executing all tasks, ensuring sequential execution.
+
+4. **Simulate Processing Time:**
+    - Tasks simulate processing time with a sleep, providing a realistic workload for the example.
+
+5. **Join Threads:**
+    - Join threads to wait for their completion, allowing the main thread to synchronize with the task execution.
+
+6. **Shutdown Executor:**
+    - Shut down the executor to release resources after all tasks are completed.
