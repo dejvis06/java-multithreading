@@ -1,14 +1,21 @@
 # Java Multithreading
 
 ### Thread Tests Overview
-The `ThreadTests` class contains unit tests for thread-related functionality in Java, showcasing various aspects of multithreading. </br>
+
+The `ThreadTests` class contains unit tests for thread-related functionality in Java, showcasing various aspects of
+multithreading. </br>
 It demonstrates thread creation, exception handling, thread naming, priority configuration, and interruption.
 
 #### Class Structure
-The class defines a main test method, `test()`, which creates and manages different threads, including a custom thread class, `CustomThread`, that extends the Java `Thread` class. The custom thread executes a simple loop and gets interrupted under a specific condition. Exception handling is also demonstrated for uncaught exceptions.
+
+The class defines a main test method, `test()`, which creates and manages different threads, including a custom thread
+class, `CustomThread`, that extends the Java `Thread` class. The custom thread executes a simple loop and gets
+interrupted under a specific condition. Exception handling is also demonstrated for uncaught exceptions.
 
 #### Test Method: test()
+
 ```java
+
 @SpringBootTest
 class ThreadTests {
 
@@ -65,6 +72,7 @@ class ThreadTests {
     }
 }
 ```
+
 #### Usage
 
 - The `test()` method demonstrates the creation and management of threads.
@@ -72,15 +80,22 @@ class ThreadTests {
 - The worker thread is configured with a custom uncaught exception handler, maximum priority, and is started.
 - Additionally, a custom thread (`CustomThread`) is created with its own exception handler and is started.
 
-
 ## Shared Object Tests Overview
-The `SharedObjectTests` class contains tests demonstrating shared state between threads using the `wait` and `notify` mechanisms in Java. It showcases a scenario where one thread modifies the state of a shared object, and another thread waits until the state is modified, utilizing synchronization to ensure proper coordination.
+
+The `SharedObjectTests` class contains tests demonstrating shared state between threads using the `wait` and `notify`
+mechanisms in Java. It showcases a scenario where one thread modifies the state of a shared object, and another thread
+waits until the state is modified, utilizing synchronization to ensure proper coordination.
 
 ### Class Structure
-The class defines a test method, `test()`, which creates an instance of `SharedObject` and two threads: a modifying thread and a checking thread. The modifying thread modifies the state of the shared object and notifies other threads waiting on it. The checking thread waits until the state is modified and then continues with its logic.
+
+The class defines a test method, `test()`, which creates an instance of `SharedObject` and two threads: a modifying
+thread and a checking thread. The modifying thread modifies the state of the shared object and notifies other threads
+waiting on it. The checking thread waits until the state is modified and then continues with its logic.
 
 #### Test Method: test()
+
 ```java
+
 @SpringBootTest
 public class SharedObjectTests {
 
@@ -146,12 +161,17 @@ public class SharedObjectTests {
 - The modifying thread modifies the state to `true` and notifies the waiting threads.
 - The checking thread waits until the state is modified, using synchronization to ensure proper coordination.
 
-The synchronized keyword ensures that changes made by one thread inside a synchronized block are visible to other threads: </br>
-When a thread exits a synchronized block, it releases the lock, and the changes it made are guaranteed to be visible to other threads, effectively flushing the **_thread's local cache_** to the **_main memory (heap)_**. </br>
+The synchronized keyword ensures that changes made by one thread inside a synchronized block are visible to other
+threads: </br>
+When a thread exits a synchronized block, it releases the lock, and the changes it made are guaranteed to be visible to
+other threads, effectively flushing the **_thread's local cache_** to the **_main memory (heap)_**. </br>
 
 ### Volatile
-For variables declared as volatile, changes made by one thread are immediately visible to other threads, as the local cache is flushed to main memory. </br>
-Volatile applies to individual variables, ensuring visibility for reads and writes, while synchronization (synchronized blocks/methods) operates on code blocks, ensuring visibility and atomicity for the operations inside the block.
+
+For variables declared as volatile, changes made by one thread are immediately visible to other threads, as the local
+cache is flushed to main memory. </br>
+Volatile applies to individual variables, ensuring visibility for reads and writes, while synchronization (synchronized
+blocks/methods) operates on code blocks, ensuring visibility and atomicity for the operations inside the block.
 
 ## Locks (LockTests)
 
@@ -160,6 +180,7 @@ The test method demonstrates a simple example of a potential deadlock using Reen
 ### Thread Actions
 
 #### Thread 1:
+
 - Acquires lock1.
 - Sleeps for 100 milliseconds (simulating some work).
 - Releases lock1.
@@ -167,6 +188,7 @@ The test method demonstrates a simple example of a potential deadlock using Reen
 - Acquires lock2.
 
 #### Thread 2:
+
 - Acquires lock2.
 - Sleeps for 500 milliseconds (introducing a delay to increase the chance of deadlock).
 - Releases lock2.
@@ -175,8 +197,9 @@ The test method demonstrates a simple example of a potential deadlock using Reen
 
 ## Semaphores
 
-Can be considered more versatile and flexible than locks, offering additional synchronization patterns beyond mutual exclusion (where only one thread or process at a time is granted exclusive access to a particular resource or critical section of code).
-
+Can be considered more versatile and flexible than locks, offering additional synchronization patterns beyond mutual
+exclusion (where only one thread or process at a time is granted exclusive access to a particular resource or critical
+section of code).
 
 ## SingleThreadExecutor (SingleThreadExecutorTests)
 
@@ -190,7 +213,8 @@ The test method showcases the usage of `SingleThreadExecutor` for the sequential
     - Tasks are submitted in a loop, simulating a sequence of asynchronous operations.
 
 3. **Sequential Execution:**
-    - `SingleThreadExecutor` ensures that tasks are processed sequentially, adhering to a first-in, first-out (FIFO) order.
+    - `SingleThreadExecutor` ensures that tasks are processed sequentially, adhering to a first-in, first-out (FIFO)
+      order.
     - The single background thread is reused for executing all tasks, ensuring sequential execution.
 
 4. **Simulate Processing Time:**
@@ -201,3 +225,12 @@ The test method showcases the usage of `SingleThreadExecutor` for the sequential
 
 6. **Shutdown Executor:**
     - Shut down the executor to release resources after all tasks are completed.
+
+## FixedThreadPool  (FixedThreadPoolTests)
+
+This method demonstrates the usage of a fixed thread pool with a size of 3.
+
+- Tasks are enqueued for execution in a loop.
+- The fixed thread pool ensures that at most 3 tasks are processed concurrently.
+- Any additional tasks are queued and executed as threads become available.
+
