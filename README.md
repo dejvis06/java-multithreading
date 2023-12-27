@@ -153,3 +153,27 @@ When a thread exits a synchronized block, it releases the lock, and the changes 
 For variables declared as volatile, changes made by one thread are immediately visible to other threads, as the local cache is flushed to main memory. </br>
 Volatile applies to individual variables, ensuring visibility for reads and writes, while synchronization (synchronized blocks/methods) operates on code blocks, ensuring visibility and atomicity for the operations inside the block.
 
+## Locks (LockTests)
+
+This test method demonstrates a simple example of a potential deadlock using ReentrantLocks.
+
+### Thread Actions
+
+#### Thread 1:
+- Acquires lock1.
+- Sleeps for 100 milliseconds (simulating some work).
+- Releases lock1.
+- Waits for lock2.
+- Acquires lock2.
+
+#### Thread 2:
+- Acquires lock2.
+- Sleeps for 500 milliseconds (introducing a delay to increase the chance of deadlock).
+- Releases lock2.
+- Waits for lock1.
+- Acquires lock1.
+
+## Semaphores
+
+Can be considered more versatile and flexible than locks, offering additional synchronization patterns beyond mutual exclusion (where only one thread or process at a time is granted exclusive access to a particular resource or critical section of code).
+
