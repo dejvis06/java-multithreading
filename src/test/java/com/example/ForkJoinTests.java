@@ -28,7 +28,6 @@ public class ForkJoinTests {
 
         long result = forkJoinPool.invoke(task);
 
-        // Use SLF4J logger instead of System.out.println
         logger.info("Sum: {}", result);
     }
 
