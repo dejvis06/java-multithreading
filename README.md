@@ -201,7 +201,7 @@ Can be considered more versatile and flexible than locks, offering additional sy
 exclusion (where only one thread or process at a time is granted exclusive access to a particular resource or critical
 section of code).
 
-## SingleThreadExecutor (SingleThreadExecutorTests)
+## SingleThreadExecutor
 
 The test method showcases the usage of `SingleThreadExecutor` for the sequential execution of tasks.
 
@@ -226,7 +226,7 @@ The test method showcases the usage of `SingleThreadExecutor` for the sequential
 6. **Shutdown Executor:**
     - Shut down the executor to release resources after all tasks are completed.
 
-## FixedThreadPool  (FixedThreadPoolTests)
+## FixedThreadPool
 
 This method demonstrates the usage of a fixed thread pool with a size of 3.
 
@@ -234,7 +234,7 @@ This method demonstrates the usage of a fixed thread pool with a size of 3.
 - The fixed thread pool ensures that at most 3 tasks are processed concurrently.
 - Any additional tasks are queued and executed as threads become available.
 
-## ScheduledExecutorService (ScheduledExecutorServiceTests)
+## ScheduledExecutorService
 
 ```java
    /**
@@ -265,7 +265,7 @@ This method demonstrates the usage of a fixed thread pool with a size of 3.
    }
 ```
 
-## CachedThreadPool (CachedThreadPoolTests)
+## CachedThreadPool
 
 This test class demonstrates the usage of a cached thread pool in Java, specifically using the `Executors.newCachedThreadPool()` factory method. </br> 
 The cached thread pool is dynamic, adjusting the number of threads based on the workload. </br>
