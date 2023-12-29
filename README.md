@@ -493,3 +493,26 @@ The `timeoutsAndErrorHandling` method introduces timeouts using `completeOnTimeo
       resultFuture.get();
    }
 ```
+
+### Overriding default Thread-Pool
+
+```java
+import java.util.concurrent.*;
+
+public class CustomThreadPoolExample {
+
+    private static final Executor customExecutor =
+            Executors.newFixedThreadPool(10); // Custom thread pool with 10 threads
+
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+            // Asynchronous computation
+            return "Hello, CompletableFuture!";
+        }, customExecutor); // Pass the custom executor here
+
+        // Block and get the result when the task is complete
+        String result = future.get();
+        System.out.println(result);
+    }
+}
+```
