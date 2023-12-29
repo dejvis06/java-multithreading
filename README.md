@@ -382,3 +382,114 @@ The Fork-Join Framework is used for parallelizing tasks by dividing them into sm
     }
 }
 ```
+
+## CompletableFuture
+
+The `CompletableFuture` is used for asynchronous programming.
+
+### Composition
+The `composition` method demonstrates how to combine results from two asynchronous tasks. It uses `CompletableFuture.supplyAsync` to perform tasks concurrently and then combines their results with `thenCombine`. The final result is obtained using `get()` after both tasks are complete.
+
+```java
+   void composition() {
+      // Task 1: Asynchronous computation that returns a string after a delay
+      CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
+         try {
+            Thread.sleep(2000); // Simulate some asynchronous computation
+         } catch (InterruptedException e) {
+            logger.error("Task 1 encountered an error", e);
+         }
+         return "Hello";
+      });
+
+      // Task 2: Asynchronous computation that returns a string after a delay
+      CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> {
+         try {
+            Thread.sleep(1000); // Simulate some asynchronous computation
+         } catch (InterruptedException e) {
+            logger.error("Task 2 encountered an error", e);
+         }
+         return "World";
+      });
+
+      // Combine the results of the two tasks when both are complete
+      CompletableFuture<String> combinedFuture = future1.thenCombine(future2, (result1, result2) -> result1 + " " + result2);
+
+      // Block and get the result when both tasks are complete
+      try {
+         String result = combinedFuture.get();
+         logger.info("Combined result: {}", result); // Use logger for output
+      } catch (InterruptedException | ExecutionException e) {
+         logger.error("An error occurred while processing tasks", e);
+      }
+   }
+```
+
+
+### Exception Handling
+In the `exceptionHandling` method, a CompletableFuture is created with a task that might throw an exception. The `exceptionally` method is used to gracefully handle exceptions. If an exception occurs, it logs the error and provides a default value.
+
+```java
+   void exceptionHandling() {
+      CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+         if (Math.random() < 0.5) {
+            throw new RuntimeException("Error occurred");
+         }
+         return "Hello";
+      });
+
+      future.exceptionally(ex -> {
+         logger.error("Exception occurred: {}", ex.getMessage());
+         return "Default Value";
+      });
+
+      future.thenAccept(result -> logger.info("Result: {}", result));
+   }
+```
+
+### Chaining
+The `chaining` method showcases chaining asynchronous operations. It starts with an initial CompletableFuture, applies a transformation using `thenApplyAsync`, and then logs the result when the chaining is complete.
+
+```java
+   void chaining() {
+      CompletableFuture<String> initialFuture = CompletableFuture.supplyAsync(() -> "Hello");
+      CompletableFuture<String> chainedFuture = initialFuture.thenApplyAsync(result -> result + " World");
+      chainedFuture.thenAccept(result -> logger.info("Chained Result: {}", result));
+   }
+```
+
+### Completion Callbacks
+In the `completionCallbacks` method, callbacks are registered to handle both success and exceptional completion. It uses `thenAccept` to log the successful result and `exceptionally` to handle exceptions by logging an error and providing a default value.
+
+```java
+   void completionCallbacks() {
+      CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> "Hello");
+
+      future.thenAccept(result -> logger.info("Success: {}", result));
+
+      future.exceptionally(ex -> {
+         logger.error("Exception occurred: {}", ex.getMessage());
+         return "Default Value";
+      });
+   }
+```
+
+### Timeouts and Error Handling
+The `timeoutsAndErrorHandling` method introduces timeouts using `completeOnTimeout`. If the original computation takes longer than the specified timeout, a default value is provided. The result is obtained using `get()` after the computation, ensuring it doesn't exceed the specified timeout.
+
+```java
+   void timeoutsAndErrorHandling() throws ExecutionException, InterruptedException {
+      CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+         try {
+            Thread.sleep(5000);
+         } catch (InterruptedException e) {
+            e.printStackTrace();
+         }
+         return "Hello";
+      });
+
+      CompletableFuture<String> resultFuture = future.completeOnTimeout("Default Value", 2000, TimeUnit.MILLISECONDS);
+      resultFuture.thenAccept(result -> logger.info("Result: {}", result));
+      resultFuture.get();
+   }
+```
